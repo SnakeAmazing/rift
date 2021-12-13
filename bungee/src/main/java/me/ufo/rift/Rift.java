@@ -16,6 +16,7 @@ import me.ufo.rift.queues.tasks.QueuePositionTask;
 import me.ufo.rift.queues.tasks.QueuePushTask;
 import me.ufo.rift.redis.Redis;
 import me.ufo.rift.server.RiftServer;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.plugin.PluginManager;
@@ -96,7 +97,9 @@ public final class Rift extends Plugin {
     ServerInfo out = null;
     for (final RiftServer server : RiftServer.getServers()) {
       if (server.isHubServer()) {
-        final ServerInfo info = this.getProxy().getServerInfo(server.getName());
+
+        ServerInfo info = ProxyServer.getInstance().getServerInfo(server.getName());
+
         if (info != null) {
           if (!this.isServerOnline(info)) {
             continue;

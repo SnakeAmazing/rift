@@ -12,6 +12,7 @@ import me.ufo.rift.server.RiftServerStatus;
 import me.ufo.rift.server.RiftServerType;
 import me.ufo.rift.util.FastUUID;
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Listener;
@@ -57,6 +58,8 @@ public final class RiftInboundListener implements Listener {
             queuePlayer.setPriority(Integer.parseInt(event.getMessage()[3]));
 
             queue.getPriorityQueue().add(queuePlayer);
+            System.out.println(queuePlayer);
+            System.out.println(queuePlayer.getUuid());
           }
           break;
         }
@@ -67,7 +70,7 @@ public final class RiftInboundListener implements Listener {
         }
 
         case PLAYER_HUB_SEND: {
-          this.plugin.getProxy().getPlayer(uuid).connect(this.plugin.getLeastPopulatedHub());
+          ProxyServer.getInstance().getPlayer(uuid).connect(this.plugin.getLeastPopulatedHub());
           break;
         }
 

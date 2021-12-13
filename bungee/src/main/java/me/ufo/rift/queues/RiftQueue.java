@@ -26,6 +26,7 @@ public final class RiftQueue {
     this.displayName = name;
     this.priorityQueue = new PriorityQueue<>(QueuePlayer::compareTo);
     this.queuing = true;
+    this.destination = false;
 
     QUEUES.add(this);
   }

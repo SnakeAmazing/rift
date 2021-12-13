@@ -5,6 +5,7 @@ import me.ufo.rift.queues.QueuePlayer;
 import me.ufo.rift.queues.RiftQueue;
 import me.ufo.rift.server.RiftServer;
 import me.ufo.rift.server.RiftServerStatus;
+import net.md_5.bungee.api.ProxyServer;
 
 public final class QueuePushTask implements Runnable {
 
@@ -43,10 +44,10 @@ public final class QueuePushTask implements Runnable {
       }
 
       final QueuePlayer player = queue.getPriorityQueue().poll();
-
       if (player != null) {
-        this.plugin.getProxy().getPlayer(player.getUuid())
-          .connect(this.plugin.getProxy().getServerInfo(player.getDestination()));
+
+        ProxyServer.getInstance().getPlayer(player.getUuid())
+          .connect(ProxyServer.getInstance().getServerInfo(player.getDestination()));
 
         player.destroy();
       }
