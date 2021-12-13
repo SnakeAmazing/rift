@@ -58,8 +58,6 @@ public final class RiftInboundListener implements Listener {
             queuePlayer.setPriority(Integer.parseInt(event.getMessage()[3]));
 
             queue.getPriorityQueue().add(queuePlayer);
-            System.out.println(queuePlayer);
-            System.out.println(queuePlayer.getUuid());
           }
           break;
         }
