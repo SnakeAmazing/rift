@@ -1,12 +1,7 @@
 package me.ufo.rift.commands;
 
-import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 import me.ufo.rift.Rift;
-import me.ufo.rift.redis.Riftbound;
 import me.ufo.rift.util.Style;
-import net.luckperms.api.LuckPermsProvider;
-import net.luckperms.api.model.user.User;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -78,33 +73,8 @@ public final class RiftCommand implements CommandExecutor {
         this.plugin.redis().async("ALL", "PING", this.plugin.response());
         break;
 
-      // temporary
-      case "permtest":
-        if (args.length == 2) {
-          sender.sendMessage(args[1]);
-          User user = null;
-          try {
-            user =
-              LuckPermsProvider.get().getUserManager().loadUser(UUID.fromString(args[1])).get();
-          } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-          }
-          sender.sendMessage(user.getPrimaryGroup());
-          return true;
-        }
-
-        final User user =
-          LuckPermsProvider.get().getUserManager().getUser(((Player) sender).getUniqueId());
-
-        sender.sendMessage(user.getUsername());
-        sender.sendMessage(user.getPrimaryGroup());
-        break;
-
-      default:
-        return false;
     }
 
-    return true;
+    return false;
   }
-
 }
